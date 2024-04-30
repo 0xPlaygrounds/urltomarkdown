@@ -7,8 +7,6 @@ const rateLimit = require('express-rate-limit');
 const JSDOM = require('jsdom').JSDOM;
 const app = express();
 
-app.set('trust proxy', 1)
-
 const rateLimiter = rateLimit({
 	windowMs: 30 * 1000,
 	max: 5,
