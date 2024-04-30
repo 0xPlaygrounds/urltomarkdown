@@ -1,11 +1,13 @@
 const readers = require('./url_to_markdown_readers.js');
 const processor = require('./url_to_markdown_processor.js');
 const validURL = require('@7c/validurl');
+const serverless = require('serverless-http');
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const JSDOM = require('jsdom').JSDOM;
-const port = process.env.PORT;
 const app = express();
+
+app.set('trust proxy', 1)
 
 const rateLimiter = rateLimit({
 	windowMs: 30 * 1000,
@@ -85,5 +87,4 @@ app.post('/', function(req, res) {
 
 });
 
-app.listen(port, () => {	
-})
+module.exports.handler = serverless(app);
